@@ -19,7 +19,9 @@ public class TestBase {
         //startChrome();
         //startIE();
         //startJBrowser();
-        startFirefox();
+        //startFirefoxHeadless();
+        //startFirefox();
+        startChromeHeadless();
         System.out.println(((HasCapabilities) driver).getCapabilities());
         wait = new WebDriverWait(driver, 10);
     }
@@ -39,20 +41,27 @@ public class TestBase {
         */
     }
 
+    private void startChromeHeadless(){
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
+    }
+
     private void startFirefox(){
-        //driver = new FirefoxDriver();
+        driver = new FirefoxDriver();
         /*
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
         options.setCapability(FirefoxDriver.MARIONETTE, false); // start Firefox before v.48
         driver = new FirefoxDriver(options);
         */
+    }
+
+    private void startFirefoxHeadless(){
         FirefoxBinary firefoxBinary = new FirefoxBinary();
         firefoxBinary.addCommandLineOptions("--headless");
-        //System.setProperty("webdriver.gecko.driver", "/opt/geckodriver");
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setBinary(firefoxBinary);
-        //firefoxOptions.setCapability("moz:headless",true);
         driver = new FirefoxDriver(firefoxOptions);
     }
 
