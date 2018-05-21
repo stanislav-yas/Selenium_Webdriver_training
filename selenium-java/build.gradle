@@ -13,3 +13,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:3.12.0'
     compile 'com.machinepublishers:jbrowserdriver:1.0.0-RC1'
 }
+
+test{
+    //maxParallelForks = 5
+}

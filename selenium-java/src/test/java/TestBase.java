@@ -16,12 +16,13 @@ public class TestBase {
 
     @Before
     public void start() {
-        //startChrome();
+        startChrome();
+        //startFirefox();
+        //startFirefoxDevEdition();
         //startIE();
         //startJBrowser();
         //startFirefoxHeadless();
-        //startFirefox();
-        startChromeHeadless();
+        //startChromeHeadless();
         System.out.println(((HasCapabilities) driver).getCapabilities());
         wait = new WebDriverWait(driver, 10);
     }
@@ -42,9 +43,7 @@ public class TestBase {
     }
 
     private void startChromeHeadless(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
     }
 
     private void startFirefox(){
@@ -57,12 +56,18 @@ public class TestBase {
         */
     }
 
+    private void startFirefoxDevEdition(){
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary("C:\\Program Files\\Firefox Developer Edition\\firefox.exe");
+        driver = new FirefoxDriver(options);
+    }
+
     private void startFirefoxHeadless(){
-        FirefoxBinary firefoxBinary = new FirefoxBinary();
-        firefoxBinary.addCommandLineOptions("--headless");
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setBinary(firefoxBinary);
-        driver = new FirefoxDriver(firefoxOptions);
+        driver = new FirefoxDriver(new FirefoxOptions().setHeadless(true));
+        //FirefoxBinary binary = new FirefoxBinary();
+        //binary.addCommandLineOptions("--headless");
+        //options.setBinary(binary);
+
     }
 
     private void startIE(){
