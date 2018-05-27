@@ -5,65 +5,94 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* Задание 9:
+* Сделайте сценарии, которые проверяют сортировку стран и геозон (штатов) в учебном приложении litecart.
+*/
+
 public class TheTask9 extends TestBase{
 
+    /*
+    * 1) на странице http://localhost/litecart/admin/?app=countries&doc=countries
+    * а) проверить, что страны расположены в алфавитном порядке
+    * б) для тех стран, у которых количество зон отлично от нуля -- открыть страницу этой страны и там проверить,
+    *    что зоны расположены в алфавитном порядке
+    */
+
     @Test
-    public void subTask1(){
+    public void Test1(){
         driver.navigate().to("http://localhost/litecart/admin/?app=countries&doc=countries");
         Assert.assertTrue("Login failed",checkLogin());
         wait.until(titleIs("Countries | My Store"));
         List<WebElement> rows = driver.findElements(By.cssSelector("table.dataTable tr.row"));
-        int countryCount = rows.size();
-        ArrayList<String> countryHrefsToCheck = new ArrayList<String>();
+        ArrayList<String> hrefs = new ArrayList<String>();
         String prevCountry = "";
         for (WebElement row:rows) {
             WebElement countryLink = row.findElement(By.cssSelector("td:nth-child(5) a"));
             String country = countryLink.getText(); // get country name
-            int compare = country.compareToIgnoreCase(prevCountry);
-            Assert.assertTrue("Sorting failed on country: "+ country, compare >= 0);
+            int compare = country.compareToIgnoreCase(prevCountry); // current and previous country names comparing
+            Assert.assertTrue("Sorting failed on country: "+ country, compare >= 0); // sorting check
             String numZonesStr = row.findElement(By.cssSelector("td:nth-child(6)")).getText(); // get number of zones
             if(Integer.parseInt(numZonesStr) > 0){
-                countryHrefsToCheck.add(countryLink.getAttribute("href")); // add country href to check for zones
+                hrefs.add(countryLink.getAttribute("href")); // add country href to check for zones
             }
             prevCountry = country;
         }
-        System.out.println(countryCount + " countries sorted well in table");
+        System.out.println(rows.size() + " rows sorted well in table Countries");
 
         /* checking country zone sorting */
-        for (String href:countryHrefsToCheck) {
+        for (String href:hrefs) {
             driver.navigate().to(href);
-            wait.until(titleIs("Countries | My Store"));
+            //Assert.assertTrue("Login failed",checkLogin());
+            wait.until(titleIs("Edit Country | My Store"));
             String country = driver.findElement(By.cssSelector("input[name=name]")).getAttribute("value");
-            rows = driver.findElements(By.cssSelector("table.dataTable tr.row"));
-            int zoneCount = rows.size();
-            String prevZone = "";
-            for (WebElement row:rows) {
-                String zoneName = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
-                int compare = zoneName.compareToIgnoreCase(prevZone);
-                Assert.assertTrue("Zone sorting failed on country: "+ country, compare >= 0);
+            String cellsSel = "table#table-zones.dataTable tr:not(.header) td:nth-child(3)"; // zone names cells cssSelector
+            List<WebElement> cells = driver.findElements(By.cssSelector(cellsSel));
+            int zoneCount = cells.size()-1;
+            String prevZoneName = "";
+            for (int i = 0; i < zoneCount; i++) {
+                String zoneName = cells.get(i).getText();
+                int compare = zoneName.compareToIgnoreCase(prevZoneName); // current and previous zone names comparing
+                Assert.assertTrue("Zone sorting failed on country="+ country + ", zone=" + zoneName + ", href=" + href,
+                        compare >= 0); // sorting check
+                prevZoneName = zoneName;
             }
+            System.out.println(zoneCount + " zones sorted well for country=" + country);
         }
     }
 
+    /*
+    * 2) на странице http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones
+    *    зайти в каждую из стран и проверить, что зоны расположены в алфавитном порядке
+    */
+
     @Test
-    public void subTask2(){
-        String href = "http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=CA";
-        driver.navigate().to(href);
+    public void Test2(){
+        driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
         Assert.assertTrue("Login failed",checkLogin());
-        wait.until(titleIs("Edit Country | My Store"));
-        String country = driver.findElement(By.cssSelector("input[name=name]")).getAttribute("value");
-        //List<WebElement> rows = driver.findElements(By.cssSelector("table#table-zones.dataTable tr"));
-        List<WebElement> cells = driver.findElements(By.cssSelector("table#table-zones.dataTable tr:not(.header) td:nth-child(3)"));
-        int zoneCount = cells.size()-1;
-        String prevZoneName = "";
-        for (int i = 0; i < zoneCount; i++) {
-            String zoneName = cells.get(i).getText();
-            int compare = zoneName.compareToIgnoreCase(prevZoneName);
-            Assert.assertTrue("Zone sorting failed on country="+ country + ", zone=" + zoneName + ", href=" + href,
-                    compare >= 0);
-            prevZoneName = zoneName;
+        wait.until(titleIs("Geo Zones | My Store"));
+        String selector = "tr.row td:nth-child(3) a"; // Geo zones tags A selector
+        List<WebElement> cells = driver.findElements(By.cssSelector(selector));
+        ArrayList<String> hrefs = new ArrayList<String>(); // Geo zones pages link collection
+        for(WebElement cell:cells){
+            hrefs.add(cell.getAttribute("href"));
         }
-        System.out.println(zoneCount + " zones sorted well in table country " + country);
+        for(String href:hrefs){
+            driver.navigate().to(href); // go to next Geo zone page
+            wait.until(titleIs("Edit Geo Zone | My Store"));
+            String geoZoneName = driver.findElement(By.cssSelector("input[name=name]")).getAttribute("value");
+            selector = "table#table-zones.dataTable tr td:nth-child(3) option[selected]"; // zones selector
+            cells = driver.findElements(By.cssSelector(selector));
+            String prevZoneName = "";
+            for(WebElement cell:cells){
+                String zoneName = cell.getText();
+                int compare = zoneName.compareToIgnoreCase(prevZoneName); // current and previous zone names comparing
+                Assert.assertTrue("Zone sorting failed on Geo zone="+ geoZoneName + ", zone=" + zoneName + ", href=" + href,
+                        compare >= 0); // sorting check
+                prevZoneName = zoneName;
+            }
+            System.out.println(cells.size() + " zones sorted well for Geo zone=" + geoZoneName);
+        }
     }
 
     private boolean checkLogin(){
