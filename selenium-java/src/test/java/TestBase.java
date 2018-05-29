@@ -1,15 +1,13 @@
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.HasCapabilities;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.ie.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.machinepublishers.jbrowserdriver.*;
 
-public class TestBase {
+class TestBase {
 
     WebDriver driver;
     WebDriverWait wait;
@@ -30,6 +28,20 @@ public class TestBase {
     @After
     public void stop() {
         driver.quit();
+    }
+
+    WebElement findElementByCssSelector(WebElement parent, String cssSelector){
+        WebElement element;
+        try{
+            if(parent == null) {
+                element = driver.findElement(By.cssSelector(cssSelector));
+            }else{
+                element = parent.findElement(By.cssSelector(cssSelector));
+            }
+        }catch (NoSuchElementException ex){
+            return null;
+        }
+        return  element;
     }
 
     private void startChrome(){

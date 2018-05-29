@@ -21,11 +21,12 @@ public class TheTask9 extends TestBase{
 
     @Test
     public void Test1(){
+
         driver.navigate().to("http://localhost/litecart/admin/?app=countries&doc=countries");
         Assert.assertTrue("Login failed",checkLogin());
         wait.until(titleIs("Countries | My Store"));
         List<WebElement> rows = driver.findElements(By.cssSelector("table.dataTable tr.row"));
-        ArrayList<String> hrefs = new ArrayList<String>();
+        ArrayList<String> hrefs = new ArrayList<>();
         String prevCountry = "";
         for (WebElement row:rows) {
             WebElement countryLink = row.findElement(By.cssSelector("td:nth-child(5) a"));
@@ -68,12 +69,13 @@ public class TheTask9 extends TestBase{
 
     @Test
     public void Test2(){
+
         driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
         Assert.assertTrue("Login failed",checkLogin());
         wait.until(titleIs("Geo Zones | My Store"));
         String selector = "tr.row td:nth-child(3) a"; // Geo zones tags A selector
         List<WebElement> cells = driver.findElements(By.cssSelector(selector));
-        ArrayList<String> hrefs = new ArrayList<String>(); // Geo zones pages link collection
+        ArrayList<String> hrefs = new ArrayList<>(); // Geo zones pages link collection
         for(WebElement cell:cells){
             hrefs.add(cell.getAttribute("href"));
         }
@@ -96,7 +98,8 @@ public class TheTask9 extends TestBase{
     }
 
     private boolean checkLogin(){
-        WebElement loginForm = null;
+
+        WebElement loginForm;
         try{
             loginForm = driver.findElement(By.cssSelector("form[name=login_form]"));
         }catch (NoSuchElementException ex){
