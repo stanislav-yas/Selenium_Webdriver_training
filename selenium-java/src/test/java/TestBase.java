@@ -14,10 +14,10 @@ class TestBase {
 
     @Before
     public void start() {
-        startChrome();
+        //startChrome();
         //startFirefox();
         //startFirefoxDevEdition();
-        //startIE();
+        startIE();
         //startJBrowser();
         //startFirefoxHeadless();
         //startChromeHeadless();
