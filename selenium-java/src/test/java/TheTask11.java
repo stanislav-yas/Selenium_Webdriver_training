@@ -26,7 +26,7 @@ public class TheTask11 extends TestBase{
         String firstName = "Donald", lastName = "Trump", address = "725 5th Ave", city = "New York", postcode = "10022";
         String namePart = "d_trump", hostPart = "@gmail.com", phone = "+1-123-456-789", password = "password";
         String email;
-        // 1 Step (Sign in)
+        // 1 Step - Sign up
         driver.navigate().to("http://localhost/litecart/en/create_account");
         wait.until(titleIs("Create Account | My Store"));
         findElementByCssSelector(null, "input[name=firstname]").sendKeys(firstName);
