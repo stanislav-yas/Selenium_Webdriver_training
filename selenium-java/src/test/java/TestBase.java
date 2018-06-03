@@ -14,14 +14,14 @@ class TestBase {
 
     @Before
     public void start() {
-        //startChrome();
+        startChrome();
         //startFirefox();
+        //startIE();
         //startFirefoxDevEdition();
-        startIE();
         //startJBrowser();
         //startFirefoxHeadless();
         //startChromeHeadless();
-        System.out.println(((HasCapabilities) driver).getCapabilities());
+        //System.out.println(((HasCapabilities) driver).getCapabilities());
         wait = new WebDriverWait(driver, 10);
     }
 

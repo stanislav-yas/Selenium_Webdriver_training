@@ -35,16 +35,16 @@ public class TheTask11 extends TestBase{
         findElementByCssSelector(null, "input[name=postcode]").sendKeys(postcode);
         findElementByCssSelector(null, "input[name=city]").sendKeys(city);
         WebElement select = findElementByCssSelector(null,"select[name=country_code]");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='US'; arguments[0].dispatchEvent(new Event('change'))", select);
+        changeSelectValueJS(select, "US");
         select = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("select[name=zone_code]")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='NY'; arguments[0].dispatchEvent(new Event('change'))", select);
+        changeSelectValueJS(select, "NY");
         findElementByCssSelector(null, "input[name=phone]").sendKeys(phone);
         if(findElementByCssSelector(null, "input[name=newsletter]").isSelected()){
             findElementByCssSelector(null, "input[name=newsletter]").click();
         }
         WebElement errorNotice;
         do{
-            email = namePart + new Random().nextInt(99) + hostPart; // generate new email
+            email = namePart + new Random().nextInt(999) + hostPart; // generate new email
             findElementByCssSelector(null, "input[name=email]").clear();
             findElementByCssSelector(null, "input[name=email]").sendKeys(email);
             findElementByCssSelector(null, "input[name=password]").sendKeys(password);
@@ -52,31 +52,38 @@ public class TheTask11 extends TestBase{
             findElementByCssSelector(null, "button[name=create_account]").click();
             errorNotice = findElementByCssSelector(null, "div.notice.errors");
         }while(errorNotice != null && errorNotice.isDisplayed()); // do again if email account already exist
-        wait.until(titleIs("Online Store | My Store"));
-        // new customer account created
-
+        boolean result = findElementByCssSelector(null, "div.notice.success") != null;
+        Assert.assertTrue("Creating account failed", result);
+        System.out.println("new customer account created:" + email);
         if(findElementByCssSelector(null, "div#box-account") != null){
-            // 2 Step (Logout)
-            driver.findElement(By.linkText("Logout")).click();
+            // customer logged in after creation account
+            driver.findElement(By.linkText("Logout")).click(); // 2 Step - Logout
         }
-        wait.until(titleIs("Online Store | My Store"));
-        if(findElementByCssSelector(null, "div#box-account-login") != null){
-            // customer logged out
-            // 3 Step (Login)
-            findElementByCssSelector(null, "input[name=email]").sendKeys(email);
-            findElementByCssSelector(null, "input[name=password]").sendKeys(password);
-            findElementByCssSelector(null, "button[name=login]").click();
-            errorNotice = findElementByCssSelector(null, "div.notice.errors");
-            if(errorNotice != null && errorNotice.isDisplayed()){
-                Assert.fail("Login failed");
-            }
+        //wait.until(titleIs("Online Store | My Store"));
+        result = findElementByCssSelector(null, "div#box-account-login") != null;
+        Assert.assertTrue("Logout failed", result);
+        System.out.println("new customer:" + email + " logged out successfully");
+        // 3 Step - Login
+        findElementByCssSelector(null, "input[name=email]").sendKeys(email);
+        findElementByCssSelector(null, "input[name=password]").sendKeys(password);
+        findElementByCssSelector(null, "button[name=login]").click();
+        errorNotice = findElementByCssSelector(null, "div.notice.errors");
+        if(errorNotice != null && errorNotice.isDisplayed()){
+            Assert.fail("Login after creating failed");
         }
-        wait.until(titleIs("Online Store | My Store"));
-        if(findElementByCssSelector(null, "div#box-account") != null){
-            // new customer logged in
-            // 4 Step (Logout)
-            driver.findElement(By.linkText("Logout")).click();
-        }
+        System.out.println("new customer:" + email + " logged in successfully");
+        driver.findElement(By.linkText("Logout")).click(); // 4 Step - Logout
+        result = findElementByCssSelector(null, "div#box-account-login") != null;
+        Assert.assertTrue("Logout failed", result);
+        System.out.println("new customer:" + email + " logged out successfully");
     }
 
+    // Changing select element value via JavaScript
+    // DOM 3 Events compliance (Browsers IE11- don't support DOM 4)
+
+    private void changeSelectValueJS(WebElement elementSelect, String value){
+        String jscode = "arguments[0].value='" + value + "'; var event = document.createEvent('Event');" +
+                " event.initEvent('change', true, true); arguments[0].dispatchEvent(event)";
+        ((JavascriptExecutor) driver).executeScript(jscode, elementSelect);
+    }
 }
