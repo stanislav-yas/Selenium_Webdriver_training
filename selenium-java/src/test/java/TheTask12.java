@@ -25,6 +25,7 @@ public class TheTask12 extends TestBase{
         String productName = "Red Star Duck";
         driver.navigate().to("http://localhost/litecart/admin");
         Assert.assertTrue("Login failed",checkLogin("admin","admin"));
+        wait.until(titleIs("My Store"));
         findElementByCssSelector(null, "ul#box-apps-menu li:nth-child(2)").click(); // Catalog menu
         wait.until(titleIs("Catalog | My Store"));
         findElementByCssSelector(null, "td#content a.button:nth-child(2)").click(); // Add New Product button
