@@ -30,7 +30,6 @@ public class TheTask12 extends TestBase{
         wait.until(titleIs("Catalog | My Store"));
         findElementByCssSelector(null, "td#content a.button:nth-child(2)").click(); // Add New Product button
         wait.until(titleIs("Add New Product | My Store"));
-        //WebElement tbody = findElementByCssSelector(null,"#tab-general > table:nth-child(1) > tbody:nth-child(1)");
         findElementByCssSelector(null,"#tab-general input[name='status']").click(); // set Status enabled
         findElementByCssSelector(null,"#tab-general input[name='name[en]']")
                 .sendKeys(productName); // enter Name
