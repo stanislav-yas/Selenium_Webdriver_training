@@ -4,6 +4,12 @@ import org.openqa.selenium.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 import java.util.List;
 
+//Задание 8. Сделайте сценарий, проверяющий наличие стикеров у товаров
+//
+//    Сделайте сценарий, проверяющий наличие стикеров у всех товаров в учебном приложении litecart на главной странице.
+//    Стикеры -- это полоски в левом верхнем углу изображения товара, на которых написано New или Sale или что-нибудь другое.
+//    Сценарий должен проверять, что у каждого товара имеется ровно один стикер.
+
 public class TheTask8 extends TestBase{
 
     @Test
