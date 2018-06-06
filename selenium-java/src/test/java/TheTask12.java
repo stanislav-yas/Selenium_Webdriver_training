@@ -1,11 +1,3 @@
-import org.junit.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.*;
-import java.util.List;
-import java.io.File;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
-
 // Задание 12. Сделайте сценарий добавления товара
 //
 //        Сделайте сценарий для добавления нового товара (продукта) в учебном приложении litecart (в админке).
@@ -17,6 +9,14 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 //        При этом указывать в коде полный абсолютный путь к файлу плохо, на другой машине работать не будет.
 //        Надо средствами языка программирования преобразовать относительный путь в абсолютный.
 //        После сохранения товара нужно убедиться, что он появился в каталоге (в админке). Клиентскую часть магазина можно не проверять.
+
+import org.junit.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
+import java.util.List;
+import java.io.File;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
 public class TheTask12 extends TestBase{
 

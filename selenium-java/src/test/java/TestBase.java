@@ -1,5 +1,4 @@
-import org.junit.After;
-import org.junit.Before;
+import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.*;
