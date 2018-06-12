@@ -72,7 +72,7 @@ class TestBase {
         ChromeOptions options = new ChromeOptions();
         //chromeOptions.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
         options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
+        driver1 = new ChromeDriver(options);
         */
     }
 
@@ -86,7 +86,7 @@ class TestBase {
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
         options.setCapability(FirefoxDriver.MARIONETTE, false); // start Firefox before v.48
-        driver = new FirefoxDriver(options);
+        driver1 = new FirefoxDriver(options);
         */
     }
 
@@ -110,7 +110,7 @@ class TestBase {
         InternetExplorerOptions options = new InternetExplorerOptions();
         options.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
         options.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        driver = new InternetExplorerDriver(options);
+        driver1 = new InternetExplorerDriver(options);
         */
     }
 
