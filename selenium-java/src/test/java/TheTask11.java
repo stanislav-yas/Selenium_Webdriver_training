@@ -1,11 +1,3 @@
-import org.junit.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
-import java.util.*;
-
 // Задание 11. Сделайте сценарий регистрации пользователя
 //
 //        Сделайте сценарий для регистрации нового пользователя в учебном приложении litecart (не в админке, а в клиентской части магазина).
@@ -17,6 +9,14 @@ import java.util.*;
 //        4) и ещё раз выход.
 //
 //        В качестве страны выбирайте United States, штат произвольный. При этом формат индекса -- пять цифр.
+
+import org.junit.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
+import java.util.*;
 
 public class TheTask11 extends TestBase{
 

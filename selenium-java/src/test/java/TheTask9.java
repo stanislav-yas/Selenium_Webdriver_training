@@ -1,14 +1,14 @@
+/*
+* Задание 9:
+* Сделайте сценарии, которые проверяют сортировку стран и геозон (штатов) в учебном приложении litecart.
+*/
+
 import org.junit.*;
 import org.openqa.selenium.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/*
-* Задание 9:
-* Сделайте сценарии, которые проверяют сортировку стран и геозон (штатов) в учебном приложении litecart.
-*/
 
 public class TheTask9 extends TestBase{
 
@@ -23,7 +23,7 @@ public class TheTask9 extends TestBase{
     public void Test1(){
 
         driver.navigate().to("http://localhost/litecart/admin/?app=countries&doc=countries");
-        Assert.assertTrue("Login failed",checkLogin());
+        Assert.assertTrue("Login failed",checkLogin("admin","admin"));
         wait.until(titleIs("Countries | My Store"));
         List<WebElement> rows = driver.findElements(By.cssSelector("table.dataTable tr.row"));
         ArrayList<String> hrefs = new ArrayList<>();
@@ -71,7 +71,7 @@ public class TheTask9 extends TestBase{
     public void Test2(){
 
         driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
-        Assert.assertTrue("Login failed",checkLogin());
+        Assert.assertTrue("Login failed",checkLogin("admin","admin"));
         wait.until(titleIs("Geo Zones | My Store"));
         String selector = "tr.row td:nth-child(3) a"; // Geo zones tags A selector
         List<WebElement> cells = driver.findElements(By.cssSelector(selector));
@@ -94,29 +94,6 @@ public class TheTask9 extends TestBase{
                 prevZoneName = zoneName;
             }
             System.out.println(cells.size() + " zones sorted well for Geo zone=" + geoZoneName);
-        }
-    }
-
-    private boolean checkLogin(){
-
-        WebElement loginForm;
-        try{
-            loginForm = driver.findElement(By.cssSelector("form[name=login_form]"));
-        }catch (NoSuchElementException ex){
-            return true; // already logged in
-        }
-        try {
-            loginForm.findElement(By.name("username")).sendKeys("admin");
-            loginForm.findElement(By.name("password")).sendKeys("admin");
-            loginForm.findElement(By.name("login")).click();
-        }catch (NoSuchElementException ex){
-            return false; // unsuccessful login
-        }
-        try{
-            driver.findElement(By.cssSelector("form[name=login_form]"));
-            return false; // unsuccessful login
-        }catch (NoSuchElementException ex){
-            return true; // successful login
         }
     }
 }
