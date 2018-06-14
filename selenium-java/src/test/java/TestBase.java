@@ -20,7 +20,7 @@ class TestBase {
         //startJBrowser();
         //startFirefoxHeadless();
         //startChromeHeadless();
-        System.out.println(((HasCapabilities) driver).getCapabilities());
+        //System.out.println(((HasCapabilities) driver).getCapabilities());
         wait = new WebDriverWait(driver, 20);
     }
 
