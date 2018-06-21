@@ -1,7 +1,9 @@
+package task19;
+
 import org.junit.After;
 import org.junit.Before;
 
-public class BaseTest {
+public class TestBase {
 
     LiteStore liteStore;
 
@@ -12,6 +14,6 @@ public class BaseTest {
 
     @After
     public void stop(){
-        liteStore.quit();
+        liteStore.stop();
     }
 }

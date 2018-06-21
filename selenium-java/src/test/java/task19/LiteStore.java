@@ -1,5 +1,10 @@
+package task19;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import task19.pages.CheckoutPage;
+import task19.pages.MainPage;
+import task19.pages.ProductPage;
 
 public class LiteStore {
 
@@ -14,12 +19,12 @@ public class LiteStore {
         checkoutPage = new CheckoutPage();
     }
 
-    public void quit(){
+    public void stop(){
         driver.quit();
     }
 
-    public ProductPage getFirstProduct(){
-        return mainPage.getProduct(0);
+    public ProductPage clickFirstProduct(){
+        return mainPage.clickProduct(0);
     }
 
     public CheckoutPage enterCheckout(){

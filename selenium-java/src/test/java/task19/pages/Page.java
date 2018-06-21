@@ -1,3 +1,5 @@
+package task19.pages;
+
 public class Page extends PageBlock{
 
     protected String pageUrl;

@@ -1,7 +1,7 @@
 // Задание 12. Сделайте сценарий добавления товара
 //
 //        Сделайте сценарий для добавления нового товара (продукта) в учебном приложении litecart (в админке).
-//        Для добавления товара нужно открыть меню Catalog, в правом верхнем углу нажать кнопку "Add New Product",
+//        Для добавления товара нужно открыть меню Catalog, в правом верхнем углу нажать кнопку "Add New po.Product",
 //         заполнить поля с информацией о товаре и сохранить.
 //        Достаточно заполнить только информацию на вкладках General, Information и Prices. Скидки (Campaigns) на вкладке Prices можно не добавлять.
 //        Переключение между вкладками происходит не мгновенно, поэтому после переключения можно сделать небольшую паузу.
@@ -28,8 +28,8 @@ public class TheTask12 extends TestBase{
         wait.until(titleIs("My Store"));
         findElementByCssSelector(null, "ul#box-apps-menu li:nth-child(2)").click(); // Catalog menu
         wait.until(titleIs("Catalog | My Store"));
-        findElementByCssSelector(null, "td#content a.button:nth-child(2)").click(); // Add New Product button
-        wait.until(titleIs("Add New Product | My Store"));
+        findElementByCssSelector(null, "td#content a.button:nth-child(2)").click(); // Add New po.Product button
+        wait.until(titleIs("Add New po.Product | My Store"));
         findElementByCssSelector(null,"#tab-general input[name='status']").click(); // set Status enabled
         findElementByCssSelector(null,"#tab-general input[name='name[en]']")
                 .sendKeys(productName); // enter Name

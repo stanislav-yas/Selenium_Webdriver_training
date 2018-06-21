@@ -1,11 +1,14 @@
-import org.junit.Test;
+package task19;
 
-public class TheTask19 extends BaseTest {
+import org.junit.Test;
+import task19.pages.CheckoutPage;
+
+public class TheTask19 extends TestBase {
 
     @Test
     public void doCheckout(){
         for (int i = 0; i < 5; i++) {
-            liteStore.getFirstProduct()
+            liteStore.clickFirstProduct()
                     .addProductToCart();
         }
         CheckoutPage checkout = liteStore.enterCheckout();

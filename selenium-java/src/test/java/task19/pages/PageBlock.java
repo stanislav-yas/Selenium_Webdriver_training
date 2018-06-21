@@ -1,6 +1,9 @@
+package task19.pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import task19.LiteStore;
 
 public class PageBlock {
 

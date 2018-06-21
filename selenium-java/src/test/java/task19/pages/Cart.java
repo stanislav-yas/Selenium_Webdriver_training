@@ -1,8 +1,10 @@
+package task19.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Cart extends PageBlock{
+public class Cart extends PageBlock {
 
     @FindBy(css = "div#cart")
     private WebElement cart;

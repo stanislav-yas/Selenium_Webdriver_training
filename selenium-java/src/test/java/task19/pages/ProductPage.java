@@ -1,3 +1,5 @@
+package task19.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -24,7 +26,7 @@ public class ProductPage extends Page {
         cart = new Cart();
     }
 
-    int addProductToCart(){
+    public int addProductToCart(){
         int quantityBefore = cart.getQuantity();
         try{
             options.findElement(By.cssSelector("option[value='Small']")).click();

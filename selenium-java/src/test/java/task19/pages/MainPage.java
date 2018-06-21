@@ -1,3 +1,5 @@
+package task19.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +18,7 @@ public class MainPage extends Page {
         cart = new Cart();
     }
 
-    public ProductPage getProduct(int productIndex){
+    public ProductPage clickProduct(int productIndex){
         open();
         if(products.size() > 0 && productIndex >= 0 && productIndex < products.size()){
             WebElement productBlock = products.get(productIndex);

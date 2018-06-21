@@ -1,3 +1,5 @@
+package task19.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +17,7 @@ public class CheckoutPage extends Page {
     @FindBy(css = "div#box-checkout-summary tr")
     private List<WebElement> orderSummaryTableRows;
 
-    CheckoutPage(){
+    public CheckoutPage(){
         pageUrl = "http://localhost/litecart/en/checkout";
     }
 
