@@ -1,19 +1,17 @@
-package task19;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Application {
+public class LiteStore {
 
     public static WebDriver driver;
     private MainPage mainPage;
-    private ProductPage productPage;
     private CheckoutPage checkoutPage;
 
 
-    public Application(){
+    public LiteStore(){
         driver = new ChromeDriver();
-        mainPage = new MainPage(driver);
+        mainPage = new MainPage();
+        checkoutPage = new CheckoutPage();
     }
 
     public void quit(){
@@ -21,6 +19,11 @@ public class Application {
     }
 
     public ProductPage getFirstProduct(){
-        return ProductPage.getProduct(0);
+        return mainPage.getProduct(0);
+    }
+
+    public CheckoutPage enterCheckout(){
+        checkoutPage.open();
+        return checkoutPage;
     }
 }

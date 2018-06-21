@@ -1,19 +1,17 @@
-package task19;
-
 import org.junit.After;
 import org.junit.Before;
 
-public class TestBase {
+public class BaseTest {
 
-    Application app;
+    LiteStore liteStore;
 
     @Before
     public void start(){
-        app = new Application();
+        liteStore = new LiteStore();
     }
 
     @After
     public void stop(){
-        app.quit();
+        liteStore.quit();
     }
 }

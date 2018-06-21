@@ -70,7 +70,7 @@ class TestBase {
         driver = new ChromeDriver();
         /*
         ChromeOptions options = new ChromeOptions();
-        //chromeOptions.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
+        //chromeOptions.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\LiteStore\\chrome.exe");
         options.addArguments("start-maximized");
         driver1 = new ChromeDriver(options);
         */
