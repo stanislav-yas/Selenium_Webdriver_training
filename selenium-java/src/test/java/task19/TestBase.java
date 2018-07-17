@@ -8,12 +8,12 @@ public class TestBase {
     LiteStore liteStore;
 
     @Before
-    public void start(){
+    public void setUp(){
         liteStore = new LiteStore();
     }
 
     @After
-    public void stop(){
+    public void tearDown(){
         liteStore.stop();
     }
 }

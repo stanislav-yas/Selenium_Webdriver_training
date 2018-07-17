@@ -12,7 +12,7 @@ class TestBase {
     WebDriverWait wait;
 
     @Before
-    public void start() {
+    public void setUp() {
         startChrome();
         //startFirefox();
         //startIE();
@@ -25,7 +25,7 @@ class TestBase {
     }
 
     @After
-    public void stop() {
+    public void tearDown() {
         driver.quit();
     }
 
